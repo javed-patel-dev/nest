@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ChatModule } from './chat.module';
-import { OrderModule } from './order.module';
-import { UserModule } from './user.module';
+import { UserModule } from './user/user.module';
+import { OrderModule } from './order/order.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [UserModule, OrderModule, ChatModule],
