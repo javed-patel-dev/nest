@@ -2,8 +2,8 @@ export class CustomResponse {
   static success(data: any, message: string, statusCode: number) {
     return {
       statusCode: statusCode ?? 200,
-      data: data ?? null,
       message: message ?? 'success',
+      data: data ?? null,
     };
   }
 
@@ -11,7 +11,7 @@ export class CustomResponse {
     return {
       statusCode: statusCode ?? 500,
       message: message ?? 'error',
-      error: error ?? null,
+      error: JSON.parse(error) ?? null,
     };
   }
 }

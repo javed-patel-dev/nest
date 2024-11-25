@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { TodoList } from './db.dto';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class TodoService {
@@ -14,7 +15,9 @@ export class TodoService {
   }
 
   CreateTodo(todo: TodoList) {
-    todo.id = Date.now().toString();
+    todo.id = uuidv4();
+    todo.created_at = new Date();
+    todo.updated_at = new Date();
     this.todos.push(todo);
     return this.todos;
   }

@@ -18,7 +18,7 @@ export class ZodValidationPipe implements PipeTransform {
         CustomResponse.error(
           JSON.parse(error)[0].message ?? 'Validation failed',
           400,
-          JSON.parse(error),
+          error,
         ),
       );
     }
