@@ -3,7 +3,7 @@ import {
   ArgumentMetadata,
   BadRequestException,
 } from '@nestjs/common';
-import { CustomResponse } from 'utils/customRes';
+import { CustomResponse } from 'src/utils/customRes';
 import { ZodSchema } from 'zod';
 
 export class ZodValidationPipe implements PipeTransform {

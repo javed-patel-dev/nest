@@ -11,8 +11,8 @@ import {
 import { TodoService } from './todo.service';
 import { TodoList } from './db.dto';
 import { createTodoSchema, updateTodoSchema } from './pipeline';
-import { CustomResponse } from 'utils/customRes';
-import { ZodValidationPipe } from 'utils/zodValidation';
+import { CustomResponse } from 'src/utils/customRes';
+import { ZodValidationPipe } from 'src/utils/zodValidation';
 
 @Controller('todos')
 export class TodoController {
