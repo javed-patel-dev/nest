@@ -13,6 +13,7 @@ import { TodoList } from './db.dto';
 import { createTodoSchema, updateTodoSchema } from './pipeline';
 import { CustomResponse } from 'src/utils/customRes';
 import { ZodValidationPipe } from 'src/utils/zodValidation';
+import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 
 @Controller('todos')
 export class TodoController {
@@ -27,8 +28,8 @@ export class TodoController {
   getTodoById(@Param('id') id: string) {
     return CustomResponse.success(
       this.todoService.listById(id),
-      'success',
-      200,
+      ReasonPhrases.OK,
+      StatusCodes.OK,
     );
   }
 
@@ -37,8 +38,8 @@ export class TodoController {
   createTodo(@Body() todo: TodoList) {
     return CustomResponse.success(
       this.todoService.CreateTodo(todo),
-      'success',
-      200,
+      ReasonPhrases.OK,
+      StatusCodes.OK,
     );
   }
 
@@ -47,8 +48,8 @@ export class TodoController {
   updateTodo(@Param('id') id: string, @Body() todo: TodoList) {
     return CustomResponse.success(
       this.todoService.UpdateTodo(id, todo),
-      'success',
-      200,
+      ReasonPhrases.OK,
+      StatusCodes.OK,
     );
   }
 
@@ -56,8 +57,8 @@ export class TodoController {
   deleteTodo(@Param('id') id: string) {
     return CustomResponse.success(
       this.todoService.DeleteTodo(id),
-      'success',
-      200,
+      ReasonPhrases.OK,
+      StatusCodes.OK,
     );
   }
 }
