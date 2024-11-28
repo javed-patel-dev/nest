@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestMiddleware } from '@nestjs/common';
 import { TodoController } from './todo.controllers';
-import { TodoService } from './todo.service';
+import { TodoService } from './todo.db.service';
 import { NextFunction } from 'express';
 
 @Module({

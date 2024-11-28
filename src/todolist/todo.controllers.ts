@@ -8,7 +8,7 @@ import {
   Put,
   UsePipes,
 } from '@nestjs/common';
-import { TodoService } from './todo.service';
+import { TodoService } from './todo.db.service';
 import { TodoList } from './db.dto';
 import { createTodoSchema, updateTodoSchema } from './pipeline';
 import { CustomResponse } from 'src/utils/customRes';
@@ -20,14 +20,18 @@ export class TodoController {
   constructor(private todoService: TodoService) {}
 
   @Get('/')
-  getTodos() {
-    return CustomResponse.success(this.todoService.listAll(), 'success', 200);
+  async getTodos() {
+    return CustomResponse.success(
+      await this.todoService.findAllAndCount(),
+      ReasonPhrases.OK,
+      StatusCodes.OK,
+    );
   }
 
   @Get('/:id')
-  getTodoById(@Param('id') id: string) {
+  async getTodoById(@Param('id') id: string) {
     return CustomResponse.success(
-      this.todoService.listById(id),
+      await this.todoService.findOne(id),
       ReasonPhrases.OK,
       StatusCodes.OK,
     );
@@ -35,9 +39,9 @@ export class TodoController {
 
   @Post('/')
   @UsePipes(new ZodValidationPipe(createTodoSchema))
-  createTodo(@Body() todo: TodoList) {
+  async createTodo(@Body() todo: TodoList) {
     return CustomResponse.success(
-      this.todoService.CreateTodo(todo),
+      await this.todoService.create(todo),
       ReasonPhrases.OK,
       StatusCodes.OK,
     );
@@ -45,18 +49,18 @@ export class TodoController {
 
   @Put('/:id')
   @UsePipes(new ZodValidationPipe(updateTodoSchema))
-  updateTodo(@Param('id') id: string, @Body() todo: TodoList) {
+  async updateTodo(@Param('id') id: string, @Body() todo: TodoList) {
     return CustomResponse.success(
-      this.todoService.UpdateTodo(id, todo),
+      await this.todoService.update(id, todo),
       ReasonPhrases.OK,
       StatusCodes.OK,
     );
   }
 
   @Delete('/:id')
-  deleteTodo(@Param('id') id: string) {
+  async deleteTodo(@Param('id') id: string) {
     return CustomResponse.success(
-      this.todoService.DeleteTodo(id),
+      await this.todoService.delete(id),
       ReasonPhrases.OK,
       StatusCodes.OK,
     );
