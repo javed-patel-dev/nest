@@ -48,7 +48,7 @@ export class TodoController {
   }
 
   @Put('/:id')
-  @UsePipes(new ZodValidationPipe(updateTodoSchema))
+  // @UsePipes(new ZodValidationPipe(updateTodoSchema))
   async updateTodo(@Param('id') id: string, @Body() todo: TodoList) {
     return CustomResponse.success(
       await this.todoService.update(id, todo),
